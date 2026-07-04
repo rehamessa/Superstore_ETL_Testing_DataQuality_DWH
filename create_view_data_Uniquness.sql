@@ -1,0 +1,35 @@
+CREATE OR REPLACE view "dp_uniquness" AS(
+SELECT
+'STG_Orders' AS Table,
+'OrderID' As Attributes,
+ COUNT ("OrderID") AS COUNT_RECORDS,
+ COUNT (DISTINCT "OrderID") AS UNIQUE_COUNT_RECORDS,
+COUNT ("OrderID")-  COUNT (DISTINCT "OrderID") AS COUNT_DUPLICATES
+FROM PUBLIC."STG_Orders" 
+UNION ALL
+SELECT 'STG_Products' AS Table,
+'ProductName' As Attributes,
+ COUNT ("ProductName") AS COUNT_RECORDS,
+ COUNT (DISTINCT "ProductName") AS UNIQUE_COUNT_RECORDS,
+COUNT ("ProductName")-  COUNT (DISTINCT "ProductName") AS COUNT_DUPLICATES
+FROM PUBLIC."STG_Orders" 
+UNION ALL
+SELECT
+'STG_Returns' AS Table,
+'OrderID' As Attributes,
+ COUNT ("OrderID") AS COUNT_RECORDS,
+ COUNT (DISTINCT "OrderID") AS UNIQUE_COUNT_RECORDS,
+COUNT ("OrderID")-  COUNT (DISTINCT "OrderID") AS COUNT_DUPLICATES
+FROM PUBLIC."STG_Returns" 
+UNION ALL
+SELECT
+'STG_RegionManagers' AS Table,
+'Manager' As Attributes,
+ COUNT ("Manager") AS COUNT_RECORDS,
+ COUNT (DISTINCT "Manager") AS UNIQUE_COUNT_RECORDS,
+COUNT ("Manager")-  COUNT (DISTINCT "Manager") AS COUNT_DUPLICATES
+FROM PUBLIC."STG_RegionManagers" 
+
+)
+
+Select * FROM Public.dp_uniquness
